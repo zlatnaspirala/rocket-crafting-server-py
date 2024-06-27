@@ -8,7 +8,6 @@ def RocketCraftingServer():
 		# print(client.list_database_names()[0])
 		print(client['rocket-1'])
 		# collection_name = dbname["platformetPY"]
-
 		return client['rocket-1']
 
 # if __name__ == "__main__":

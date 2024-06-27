@@ -1,5 +1,7 @@
 # rocket-crafting-server-py
-New RCServer [python vs mobgoBD]
+## Based on webSocket tech
+
+- New RCServer [python vs mongoDB]
 
 ## Install:
 ```bash
@@ -9,5 +11,3 @@ source env/bin/activate
 python -m pip install "pymongo[srv]"
 python -m pip install python-dateutil
 ```
-
-## 
