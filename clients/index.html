@@ -1,25 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebSocker Client</title>
+    <title>RocketCraftingClient</title>
+    <style>
+        body {
+            background: #333;
+            color: white;
+            font-family: monospace;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] ,
+        textarea {
+            width: 200px;
+            height: 25px;
+            font-family: monospace;
+            color:white;
+            background-color: #222222 !important;
+        }
+
+        .myForms {
+            font-family: monospace;
+            border: solid 10px rgb(210, 186, 29);
+            padding: 10px 10px 10px 10px;
+        }
+    </style>
 </head>
+
 <body>
-    <button onclick="contactServer">Click Here</button>
+    <div style="display: flex;flex-direction: column; ">
+        <div>
+            <h1>RocketCraftingServer Python WebSocket API DOcs</h1>
+            <h2>Created by Nikola Lukic</h2>
+            <h2>Source code at </h2>
+        </div>
+        <div class="myForms">
+            <h2>REGISTER FORM</h2>
+            <input id="email" type="email" value="zlatnaspirala@gmail.com" />
+            <input id="password" type="password" value="123123123"/>
+            <button id="register">Register test</button>
+        </div>
+    </div>
 </body>
 <script>
+    var byId = function(i) {return document.getElementById(i)}
+    byId('register').addEventListener("click", () => {
+        var data = {
+            action: "REGISTER",
+            userRegData: {
+                password: byId('password').value,
+                email: byId('email').value
+            }
+        };
+        socket.send(JSON.stringify(data));
+    })
     const socket = new WebSocket('ws://localhost:8000');
-socket.addEventListener('open', function (event) {
-    socket.send('Connection Established');
-});
+    socket.addEventListener('open', function(event) {
+        socket.send('Connection Established');
+    });
 
-socket.addEventListener('message', function (event) {
-    console.log(event.data);
-});
-const contactServer = () => {
-    socket.send("Initialize");
-}
+    socket.addEventListener('close', function(event) {
+        console.log("ON CLOSE:" + event);
+    });
+
+    socket.addEventListener('message', function(event) {
+        console.log("ON MESSAGE:" + event.data);
+        return false;
+    });
+
+    socket.onmessage = function(event) {
+        event.preventDefault()
+        console.log("ON MESSAGE2 :" + event.data);
+        return false;
+    };
 </script>
+
 </html>

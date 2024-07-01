@@ -1,4 +1,9 @@
 {
-	"editor.insertSpaces": false,
-	"editor.defaultFormatter": "BattleBas.kivy-vscode"
+	"editor.insertSpaces": true,
+	"editor.defaultFormatter": "ms-python.python",
+	"editor.detectIndentation": true,
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.autopep8"
+	},
+	"editor.tabSize": 2
 }
