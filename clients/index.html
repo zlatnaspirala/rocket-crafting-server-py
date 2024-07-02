@@ -53,14 +53,48 @@
         </div>
         <div class="myForms">
             <h2>REGISTER CONFIRMATION FORM</h2>
-            <input id="email" type="email" value="zlatnaspirala@gmail.com" />
-            <input id="code" type="password" value=""/>
+            <input id="emailConfirm" type="email" value="zlatnaspirala@gmail.com" />
+            <input id="tokenConfirm" type="password" value=""/>
             <button id="registerConfirmation">Confirm</button>
+        </div>
+        <div class="myForms">
+            <h2>LOGIN FORM</h2>
+            <input id="email" type="email" value="zlatnaspirala@gmail.com" />
+            <input id="passwordLogin" type="password" value=""/>
+            <button id="login">Login</button>
+        </div>
+        <div class="myForms">
+            <h2>FAST LOGIN FORM</h2>
+            <input id="email" type="email" value="zlatnaspirala@gmail.com" />
+            <input id="token" type="password" value=""/>
+            <button id="fastLogin">Fast Login</button>
         </div>
     </div>
 </body>
 <script>
     var byId = function(i) {return document.getElementById(i)}
+    byId('login').addEventListener("click", () => {
+        // COMFIRMATION
+        var data = {
+            action: "LOGIN",
+            userRegData: {
+                password: byId('passwordLogin').value,
+                email: byId('emailConfirm').value
+            }
+        };
+        socket.send(JSON.stringify(data));
+    })
+    byId('registerConfirmation').addEventListener("click", () => {
+        // COMFIRMATION
+        var data = {
+            action: "COMFIRMATION",
+            userRegData: {
+                token: byId('tokenConfirm').value,
+                email: byId('emailConfirm').value
+            }
+        };
+        socket.send(JSON.stringify(data));
+    })
     byId('register').addEventListener("click", () => {
         var data = {
             action: "REGISTER",
@@ -88,6 +122,10 @@
     socket.onmessage = function(event) {
         event.preventDefault()
         console.log("ON MESSAGE2 :" + event.data);
+        var test = JSON.parse(event.data)
+        if (typeof test.rocketStatus != 'undefined') {
+            alert("Reg confirmed")
+        }
         return false;
     };
 </script>

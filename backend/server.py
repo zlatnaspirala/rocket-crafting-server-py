@@ -18,7 +18,7 @@ async def send_ping(websocket):
     while True:
         data = await websocket.recv()
         print(colored('data:', 'red'), colored(data, 'green'))
-        netHandler.handleClientRequest(data, websocket)
+        await netHandler.handleClientRequest(data, websocket)
         await asyncio.sleep(1)
         ping = {"type": "ping"}
         await websocket.send(json.dumps(ping))

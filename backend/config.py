@@ -6,7 +6,7 @@ import json
 
 
 def getDBAddress():
-    dbAddress = "mongodb+srv://zlatnaspirala:jU2nmCNKlFqrZ6hS@cluster0.kft9q9e.mongodb.net/test?authSource=admin&readPreference=primary&ssl=true"
+    dbAddress = "mongodb+srv://zlatnaspirala:**********@cluster0.kft9q9e.mongodb.net/test?authSource=admin&readPreference=primary&ssl=true"
     return dbAddress
 
 

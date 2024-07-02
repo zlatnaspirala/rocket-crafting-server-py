@@ -11,9 +11,9 @@ def confirmationTemplate(token, userName):
           <h3> Welcome to GamePlay Platform,<br /> 
             dear <span style="color: black" > """ + userName + """</span>. </h3><br/>
           <p>Confirm you email address: <br/>
-            Copy/Paste in your SignUp form.</p> <br/>
-          <p>CODE: """ + token + """ </p> <br /><br /><br />
-          <small>Based on Safir and RocketCraftingServer projects.</small><br />
+            Copy/Paste in your Confirm form.</p> <br/>
+          <p>CODE: """ + token + """ </p> <br />
+          <small>RocketCraftingServer Py sock server.</small><br />
           <img style="width:80px;" src="https://github.com/zlatnaspirala/safir/blob/main/hello/assets/icons/192.png?raw=true"/><br />
           <small>Free Open source projects at https://github.com/zlatnaspirala</small><br />
           <small>maximumroulette.com 2024 </small><br />

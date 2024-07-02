@@ -40,30 +40,17 @@ msgFromCLient.data.userRegData.email & password;
 After "USER_REGISTRED" Server send validation code to the user email and sock emit data ->
 
 ```js
-let codeSended = {
-  action: "CHECK_EMAIL",
-  data: {
-    accessToken: socketId,
-    text: "Please check your email to get verification code. Paste code here :",
+var data = {
+  action: "COMFIRMATION",
+  userRegData: {
+    token: byId("token").value,
+    email: byId("email").value,
   },
 };
-codeSended = JSON.stringify(codeSended);
-callerInstance.userSockCollection[socketId].send(codeSended);
-console.log("Email reg sended. Notify client.");
+socket.send(JSON.stringify(data));
 ```
 
-In error case :
-
+Confirmation code response:
 ```js
-console.warn("Connector error in sending reg email!", error);
-let codeSended = {
-  action: "ERROR_EMAIL",
-  data: {
-    errMsg:
-      "Please check your email again!, Something wrong with current email!",
-  },
-};
-codeSended = JSON.stringify(codeSended);
-callerInstance.userSockCollection[socketId].send(codeSended);
-console.log("Email reg error. Notify client.");
+  {"message": "Confirmation done.", "rocketStatus": "USER_CONFIRMED"}
 ```

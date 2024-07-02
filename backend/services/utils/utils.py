@@ -55,8 +55,6 @@ class CryptoHandler2:
         return decrypted.decode('utf-8')
 
 
-
-
 class CryptoHandler:
     def __init__(self):
         self.algorithm = 'aes-256-ctr'
