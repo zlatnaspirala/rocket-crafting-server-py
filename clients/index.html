@@ -13,13 +13,21 @@
             font-family: monospace;
         }
 
-        input[type="text"], input[type="email"], input[type="password"] ,
-        textarea {
+        input[type="text"], input[type="email"], input[type="password"] {
             width: 200px;
             height: 25px;
             font-family: monospace;
             color:white;
             background-color: #222222 !important;
+            border: none;
+        }
+        button {
+            width: 200px;
+            height: 25px;
+            font-family: monospace;
+            color:white;
+            background-color: #222222 !important;
+            border: solid 2px  gray;
         }
 
         .myForms {
@@ -42,6 +50,12 @@
             <input id="email" type="email" value="zlatnaspirala@gmail.com" />
             <input id="password" type="password" value="123123123"/>
             <button id="register">Register test</button>
+        </div>
+        <div class="myForms">
+            <h2>REGISTER CONFIRMATION FORM</h2>
+            <input id="email" type="email" value="zlatnaspirala@gmail.com" />
+            <input id="code" type="password" value=""/>
+            <button id="registerConfirmation">Confirm</button>
         </div>
     </div>
 </body>

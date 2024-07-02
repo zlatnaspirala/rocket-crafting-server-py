@@ -1,35 +1,34 @@
 import asyncio
 import websockets
-import config
+from services.utils.utils import bgcolors
 import networking.net as netHandler
-# import database.db as rcs
 import json
+from termcolor import colored
+import config
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # RocketCraftingServerPy
 # version 1.0.0
+# Python vs MongoDB real powerfull choose
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# # Run DB part test
-# rcsUsers = rcs.RocketCraftingServer("users")
-# rcs.register(rcs.SHEMA["DB_USER"], rcsUsers)
-# print("rcsUsers->", rcsUsers)
-# Sock
 
 async def send_ping(websocket):
     print("Sent ping message attached.")
     while True:
         data = await websocket.recv()
-        print('MY DATA' + data)
-        netHandler.handleClientRequest(data)
+        print(colored('data:', 'red'), colored(data, 'green'))
+        netHandler.handleClientRequest(data, websocket)
         await asyncio.sleep(1)
         ping = {"type": "ping"}
         await websocket.send(json.dumps(ping))
-        # print("Sent ping message")
 
 
 async def handleClient(websocket, path):
     data = await websocket.recv()
     print("r______: " + data)
     if data == "Connection Established":
-        print("JUST WELCOME RETURN: ")
+        print("<JUST WELCOME>")
         await send_ping(websocket)
         return
     # Sock draft
@@ -39,7 +38,8 @@ async def handleClient(websocket, path):
 start_server = websockets.serve(
     handleClient, config.getServerName(), config.port())
 
+print(bgcolors.WARNING +
+      "Rocket Crafting Server Py Sock started on port: " + str(config.port()))
+
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
-
-print("Rocket Crafting Server Py Sock started on port {config.port()}")

@@ -15,7 +15,10 @@ source env/bin/activate
 
 python -m pip install "pymongo[srv]"
 python -m pip install python-dateutil
+python -m pip install pycryptodome
 ```
+
+If you have any error lof like missing module just install it.
 
 ## Documentation for websock RCS-Py
 
