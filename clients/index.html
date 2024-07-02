@@ -124,7 +124,7 @@
         console.log("ON MESSAGE2 :" + event.data);
         var test = JSON.parse(event.data)
         if (typeof test.rocketStatus != 'undefined') {
-            alert("Reg confirmed")
+            alert("rocketStatus : " + test.rocketStatus)
         }
         return false;
     };

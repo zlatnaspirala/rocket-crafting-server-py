@@ -54,3 +54,7 @@ Confirmation code response:
 ```js
   {"message": "Confirmation done.", "rocketStatus": "USER_CONFIRMED"}
 ```
+
+
+
+mongosh --port 27017 -u myUserAdmin -p  --authenticationDatabase 'admin'

@@ -36,14 +36,11 @@ def RocketCraftingServer(collection):
 
 
 def register(documentToInsert, collection):
-    print("documentToInsert.email : " + documentToInsert["email"])
+    print("register : " + documentToInsert["email"])
     try:
         test = collection.find_one({"email": documentToInsert["email"]})
         if test == None:
-            print("Encode pass [str(documentToInsert[password])] : ", str(
-                documentToInsert["password"]))
             test = crypto_handler.encrypt(str(documentToInsert["password"]))
-            print("Encode pass: ", test)
             documentToInsert["password"] = test
             documentToInsert["token"] = utils.GetToken()
             emailService.SEND_COMF(documentToInsert["email"], emailTemplates.confirmationTemplate(
