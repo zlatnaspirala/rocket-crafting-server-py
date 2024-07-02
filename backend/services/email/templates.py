@@ -13,10 +13,10 @@ def confirmationTemplate(token, userName):
           <p>Confirm you email address: <br/>
             Copy/Paste in your SignUp form.</p> <br/>
           <p>CODE: """ + token + """ </p> <br /><br /><br />
-          <small>Based on Safir and RocketCraftingServer projects.</small>
-          <img style="width:80px;" src="https://github.com/zlatnaspirala/safir/blob/main/hello/assets/icons/192.png?raw=true"/>
-          <small>Get source code at https://github.com/zlatnaspirala<small>
-          <small>Powered by maximumroulette.com 2024</small>
+          <small>Based on Safir and RocketCraftingServer projects.</small><br />
+          <img style="width:80px;" src="https://github.com/zlatnaspirala/safir/blob/main/hello/assets/icons/192.png?raw=true"/><br />
+          <small>Free Open source projects at https://github.com/zlatnaspirala</small><br />
+          <small>maximumroulette.com 2024 </small><br />
         </div>
         </body>
         </html>"""

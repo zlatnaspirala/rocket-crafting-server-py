@@ -13,17 +13,17 @@ SHEMA["DB_USER"] = {
   "email": "fake_pythontest@localhost.com",
   "password": "",
   "nickname": "no-nick-name0",
-  "confirmed": "true",
+  "confirmed": True,
   "token": "aaaaaa",
   "socketid": "null",
-  "online": "false",
+  "online": False,
   "points": 1000,
   "rank": "junior",
   "permission": "basic",
   "age": "any",
   "country": "any",
   "ban": "false",
-  "profileUrl": "/imgs/DjoBw"
+  "profileUrl": "/imgs/default"
 }
 
 def RocketCraftingServer(collection):
