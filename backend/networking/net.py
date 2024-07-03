@@ -62,6 +62,10 @@ async def handleClientRequest(data, websocket):
                 "message": "Login error",
                 "rocketStatus": "NOT_LOGGED"}
             await rocket_send(websocket, json.dumps(response))
+    elif str(o["action"]) == "LOGOUT":
+        rcsUsers = rcs.RocketCraftingServer("users")
+        result = rcs.logout(o["userLoginData"], rcsUsers)
+        await rocket_send(websocket, json.dumps(result))
     else:
         return "unhandled"
         print("unhandled request...")

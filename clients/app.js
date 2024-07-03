@@ -5,6 +5,17 @@
  *  - How to use account session data with websockets
  */
 var byId = function(i) {return document.getElementById(i)}
+byId('logout').addEventListener("click", () => {
+  // CONFIRMATION
+  var data = {
+    action: "LOGOUT",
+    userLoginData: {
+      token: byId('tokenFLogin').value,
+      email: byId('emailFLogin').value
+    }
+  };
+  socket.send(JSON.stringify(data));
+})
 byId('fastLogin').addEventListener("click", () => {
   // CONFIRMATION
   var data = {

@@ -152,3 +152,26 @@ def fastLogin(documentToInsert, collection):
     except Exception as e:
         print("An exception occurred ::", e)
         return False
+
+
+def logout(documentToInsert, collection):
+    print("logout :" + str(documentToInsert["email"]))
+    try:
+        testPass = collection.find_one({
+            "email": documentToInsert["email"],
+            "token": documentToInsert["token"],
+            "online": True})
+        if testPass != None:
+            print("token access -> ", testPass['token'])
+            print("<FASTLOGIN PASSED>")
+            user = collection.update_one({"email": documentToInsert["email"], "token": testPass['token']},
+                                         {"$set": {'online': False}})
+            print("USER LOGOUT ", user)
+            return {"message": "Your account session is closed.",
+                    "rocketStatus": "USER_LOGOUT"}
+        else:
+            return {"message": "Error in USER_LOGOUT.",
+                    "rocketStatus": "USER_LOGOUT_ERROR"}
+    except Exception as e:
+        print("An exception occurred ::", e)
+        return False
