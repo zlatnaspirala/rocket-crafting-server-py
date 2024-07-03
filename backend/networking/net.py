@@ -26,8 +26,8 @@ async def handleClientRequest(data, websocket):
                 "rocketStatus": "CHECK_EMAIL"}
             await rocket_send(websocket, json.dumps(response))
         return result
-    elif str(o["action"]) == "COMFIRMATION":
-        print("<COMFIRMATION>")
+    elif str(o["action"]) == "CONFIRMATION":
+        print("<CONFIRMATION>")
         rcsUsers = rcs.RocketCraftingServer("users")
         result = rcs.registerConfirmation(o["userRegData"], rcsUsers)
         print("USER_CONFIRMED ", result)
@@ -35,6 +35,32 @@ async def handleClientRequest(data, websocket):
             response = {
                 "message": "Confirmation done.",
                 "rocketStatus": "USER_CONFIRMED"}
+            await rocket_send(websocket, json.dumps(response))
+    elif str(o["action"]) == "LOGIN":
+        print("<LOGIN>")
+        rcsUsers = rcs.RocketCraftingServer("users")
+        result = rcs.login(o["userLoginData"], rcsUsers)
+        if isinstance(result, str) == False and result["rocketStatus"] == "USER_LOGGED":
+            await rocket_send(websocket, json.dumps(result))
+        elif result == "NO_LOGIN":
+            response = {
+                "message": "Login error",
+                "rocketStatus": "NOT_LOGGED"}
+            await rocket_send(websocket, json.dumps(response))
+    elif str(o["action"]) == "FASTLOGIN":
+        print("<FASTLOGIN>")
+        rcsUsers = rcs.RocketCraftingServer("users")
+        result = rcs.fastLogin(o["userLoginData"], rcsUsers)
+        print("USER_LOGGED ", result)
+        if result == "USER_LOGGED":
+            response = {
+                "message": "You logged.",
+                "rocketStatus": "USER_LOGGED"}
+            await rocket_send(websocket, json.dumps(response))
+        elif result == "NO_LOGIN":
+            response = {
+                "message": "Login error",
+                "rocketStatus": "NOT_LOGGED"}
             await rocket_send(websocket, json.dumps(response))
     else:
         return "unhandled"

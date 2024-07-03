@@ -24,7 +24,19 @@ If you have any error lof like missing module just install it.
 
 Same shema also used in visual-ts game engine && Rest api RCS variant.
 
-- Route : `register`
+### - Route : `register`
+
+Client request:
+```js
+var data = {
+    action: "REGISTER",
+    userRegData: {
+        password: byId('password').value,
+        email: byId('email').value
+    }
+};
+socket.send(JSON.stringify(data));
+```
 
 ```js
 msgFromCLient.action === "REGISTER";
@@ -39,9 +51,10 @@ msgFromCLient.data.userRegData.email & password;
 
 After "USER_REGISTRED" Server send validation code to the user email and sock emit data ->
 
+Client request:
 ```js
 var data = {
-  action: "COMFIRMATION",
+  action: "CONFIRMATION",
   userRegData: {
     token: byId("token").value,
     email: byId("email").value,
@@ -55,6 +68,3 @@ Confirmation code response:
   {"message": "Confirmation done.", "rocketStatus": "USER_CONFIRMED"}
 ```
 
-
-
-mongosh --port 27017 -u myUserAdmin -p  --authenticationDatabase 'admin'
