@@ -4,7 +4,11 @@ import services.email.service as emailService
 import services.email.templates as emailTemplates
 import services.utils.utils as utils
 
-# ~~~~~~~~~~~~~~~~~~~~~
+# ----------------------------------------------------
+# DATABASE SCRIPT
+# Basic session operation (reg, confirm, login ...)
+# ----------------------------------------------------
+
 crypto_handler = utils.CryptoHandler()
 
 SHEMA = {"DB_USER": "null"}
@@ -36,14 +40,11 @@ def RocketCraftingServer(collection):
 
 
 def register(documentToInsert, collection):
-    print("documentToInsert.email : " + documentToInsert["email"])
+    print("register : " + documentToInsert["email"])
     try:
         test = collection.find_one({"email": documentToInsert["email"]})
         if test == None:
-            print("Encode pass [str(documentToInsert[password])] : ", str(
-                documentToInsert["password"]))
             test = crypto_handler.encrypt(str(documentToInsert["password"]))
-            print("Encode pass: ", test)
             documentToInsert["password"] = test
             documentToInsert["token"] = utils.GetToken()
             emailService.SEND_COMF(documentToInsert["email"], emailTemplates.confirmationTemplate(
@@ -73,6 +74,104 @@ def registerConfirmation(documentToInsert, collection):
                                          {"$set": {'confirmed': True}})
             print("Confirmed registred! ", test)
             return "USER_CONFIRMED"
+    except Exception as e:
+        print("An exception occurred ::", e)
+        return False
+
+
+def login(documentToInsert, collection):
+    print("login fоr email: " + str(documentToInsert["email"]))
+    try:
+        testPass = collection.find_one({"email": documentToInsert["email"]})
+        if testPass != None:
+            print("SIFRA -> ", testPass['password'])
+            print("SIFRA -> ", crypto_handler.decrypt(testPass['password']))
+            original_pass = crypto_handler.decrypt(testPass['password'])
+            if str(documentToInsert["password"]) == original_pass:
+                print("<LOGIN PASSED>")
+                user = collection.update_one({"email": documentToInsert["email"], "token": testPass['token']},
+                                             {"$set": {'online': True}})
+                # SEC
+                userData = {
+                    "email": testPass["email"],
+                    "nickname": testPass["nickname"],
+                    "confirmed": testPass["confirmed"],
+                    "token": testPass["token"],
+                    # "socketid":: user["email"],
+                    "online": testPass["online"],
+                    "points": testPass["points"],
+                    "rank": testPass["rank"],
+                    "permission": testPass["permission"],
+                    "age": testPass["age"],
+                    "country": testPass["country"],
+                    "ban": testPass["ban"],
+                    "profileUrl": testPass["profileUrl"]}
+                return {"message": "You logged.",
+                        "rocketStatus": "USER_LOGGED",
+                        "flag": userData}
+            else:
+                return "NO_LOGIN"
+        else:
+            return "NO_LOGIN"
+    except Exception as e:
+        print("An exception occurred ::", e)
+        return False
+
+
+def fastLogin(documentToInsert, collection):
+    print("fastlogin work only if online is true fоr user/email: " +
+          str(documentToInsert["email"]))
+    try:
+        testPass = collection.find_one({
+            "email": documentToInsert["email"],
+            "token": documentToInsert["token"],
+            "online": True})
+        if testPass != None:
+            print("token access -> ", testPass['token'])
+            print("<FASTLOGIN PASSED>")
+            # SEC
+            userData = {
+                "email": testPass["email"],
+                "nickname": testPass["nickname"],
+                "confirmed": testPass["confirmed"],
+                "token": testPass["token"],
+                # "socketid":: user["email"],
+                "online": testPass["online"],
+                "points": testPass["points"],
+                "rank": testPass["rank"],
+                "permission": testPass["permission"],
+                "age": testPass["age"],
+                "country": testPass["country"],
+                "ban": testPass["ban"],
+                "profileUrl": testPass["profileUrl"]}
+            return {"message": "You logged.",
+                    "rocketStatus": "USER_LOGGED",
+                    "flag": userData}
+        else:
+            return "NO_LOGIN"
+    except Exception as e:
+        print("An exception occurred ::", e)
+        return False
+
+
+def logout(documentToInsert, collection):
+    print("logout :" + str(documentToInsert["email"]))
+    try:
+        testPass = collection.find_one({
+            "email": documentToInsert["email"],
+            "token": documentToInsert["token"],
+            "online": True})
+        if testPass != None:
+            print("token access -> ", testPass['token'])
+            print("<FASTLOGIN PASSED>")
+            user = collection.update_one({"email": documentToInsert["email"], "token": testPass['token']},
+                                         {"$set": {'online': False}})
+            print("USER LOGOUT ", user)
+            return {"message": "Your account session is closed.",
+                    "rocketStatus": "USER_LOGOUT"}
+        else:
+            return {"message": "Error in USER_LOGOUT.",
+                    "rocketStatus": "USER_LOGOUT_ERROR"}
     except Exception as e:
         print("An exception occurred ::", e)
         return False

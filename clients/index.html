@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RocketCraftingClient</title>
+    <meta name="author" content="Nikola Lukic zlatnaspirala@gmail.com">
+    <title>RocketCraftingClient Py-Sock version [Web Client part]</title>
     <style>
         body {
             background: #333;
@@ -13,121 +14,144 @@
             font-family: monospace;
         }
 
-        input[type="text"], input[type="email"], input[type="password"] {
+        a {
+            color: rgb(40, 140, 255);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
             width: 200px;
             height: 25px;
             font-family: monospace;
-            color:white;
+            color: white;
             background-color: #222222 !important;
             border: none;
         }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            background-color: #333;
+            color:lime;
+        }
         button {
+            cursor: pointer;
             width: 200px;
             height: 25px;
             font-family: monospace;
-            color:white;
+            color: white;
             background-color: #222222 !important;
-            border: solid 2px  gray;
+            border: solid 2px gray;
         }
 
         .myForms {
             font-family: monospace;
-            border: solid 10px rgb(210, 186, 29);
+            border: solid 8px rgb(210, 186, 29);
             padding: 10px 10px 10px 10px;
+            margin: 5px 1px 5px 1px;
+        }
+
+        #logs {
+            border: solid 1px #e0e0e0;
+        }
+
+        #msgBox {
+            text-shadow: 0px 4px 4px #282828;
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and IE 11 */
+            user-select: none;
+            /* Standard syntax */
+            background: rgb(2, 0, 36);
+            background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(9, 81, 121, 0.8463760504201681) 34%, rgba(0, 212, 255, 1) 100%);
+        }
+
+        .msg-box {
+            display: none;
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            translate: -50%;
+            border-radius: 6px !important;
+            font-size: 15px !important;
+            width: 300px;
+            padding: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+
+            &.error {
+                /* background-color: rgb(93, 4, 5); */
+                color: rgb(255, 0, 30);
+            }
+
+            &.success {
+                /* background-color: rgb(220, 14, 14); */
+                color: rgb(32, 255, 84);
+                text-align: center;
+                margin-left: -150px;
+                z-index: 20;
+            }
         }
     </style>
 </head>
 
 <body>
+    <div id="msgBox" class="msg-box animate1" onclick="mb.copy()"></div>
     <div style="display: flex;flex-direction: column; ">
         <div>
-            <h1>RocketCraftingServer Python WebSocket API DOcs</h1>
-            <h2>Created by Nikola Lukic</h2>
-            <h2>Source code at </h2>
+            <h2>RocketCraftingServer Python WebSocket API Docs</h2>
+            <p>RCS is alias for `Rocket Crafting Server`.</p>
+            <p>Source code at <a href="https://github.com/zlatnaspirala/rocket-crafting-server-py">repo</a>.
+                This page is basic example how tu use RCS-Py-sock. DB shema is always same like REST variant od RCS.</p>
+        </div>
+        <div id="___a">
+            <textarea id="logs"></textarea>
         </div>
         <div class="myForms">
-            <h2>REGISTER FORM</h2>
+            <h3>REGISTER FORM</h3>
+            <div style="margin: 5px 5px 5px 5px;padding: 5px 5px 5px 5px;border: solid 1px black;">
+                <label>Detail:</label>
+                var data = {
+                action: "REGISTER",
+                userRegData: {
+                password: byId('password').value,
+                email: byId('email').value
+                }
+                };
+                socket.send(JSON.stringify(data));
+            </div>
             <input id="email" type="email" value="zlatnaspirala@gmail.com" />
-            <input id="password" type="password" value="123123123"/>
+            <input id="password" type="password" value="123123123" />
             <button id="register">Register test</button>
         </div>
         <div class="myForms">
-            <h2>REGISTER CONFIRMATION FORM</h2>
+            <h3>REGISTER CONFIRMATION FORM</h3>
             <input id="emailConfirm" type="email" value="zlatnaspirala@gmail.com" />
-            <input id="tokenConfirm" type="password" value=""/>
+            <input id="tokenConfirm" type="password" value="" />
             <button id="registerConfirmation">Confirm</button>
         </div>
         <div class="myForms">
-            <h2>LOGIN FORM</h2>
-            <input id="email" type="email" value="zlatnaspirala@gmail.com" />
-            <input id="passwordLogin" type="password" value=""/>
+            <h3>LOGIN FORM</h3>
+            <input id="emailLogin" type="email" value="zlatnaspirala@gmail.com" />
+            <input id="passwordLogin" type="password" value="" />
             <button id="login">Login</button>
         </div>
         <div class="myForms">
-            <h2>FAST LOGIN FORM</h2>
-            <input id="email" type="email" value="zlatnaspirala@gmail.com" />
-            <input id="token" type="password" value=""/>
+            <h3>FAST LOGIN FORM</h3>
+            <input id="emailFLogin" type="email" value="zlatnaspirala@gmail.com" />
+            <input id="tokenFLogin" type="password" value="" />
             <button id="fastLogin">Fast Login</button>
+        </div>
+        <div class="myForms">
+            <h3>LOGOUT FORM</h3>
+            <input id="emailLogout" type="email" value="zlatnaspirala@gmail.com" />
+            <input id="tokenLogout" type="password" value="" />
+            <button id="logout">Logout</button>
         </div>
     </div>
 </body>
-<script>
-    var byId = function(i) {return document.getElementById(i)}
-    byId('login').addEventListener("click", () => {
-        // COMFIRMATION
-        var data = {
-            action: "LOGIN",
-            userRegData: {
-                password: byId('passwordLogin').value,
-                email: byId('emailConfirm').value
-            }
-        };
-        socket.send(JSON.stringify(data));
-    })
-    byId('registerConfirmation').addEventListener("click", () => {
-        // COMFIRMATION
-        var data = {
-            action: "COMFIRMATION",
-            userRegData: {
-                token: byId('tokenConfirm').value,
-                email: byId('emailConfirm').value
-            }
-        };
-        socket.send(JSON.stringify(data));
-    })
-    byId('register').addEventListener("click", () => {
-        var data = {
-            action: "REGISTER",
-            userRegData: {
-                password: byId('password').value,
-                email: byId('email').value
-            }
-        };
-        socket.send(JSON.stringify(data));
-    })
-    const socket = new WebSocket('ws://localhost:8000');
-    socket.addEventListener('open', function(event) {
-        socket.send('Connection Established');
-    });
-
-    socket.addEventListener('close', function(event) {
-        console.log("ON CLOSE:" + event);
-    });
-
-    socket.addEventListener('message', function(event) {
-        console.log("ON MESSAGE:" + event.data);
-        return false;
-    });
-
-    socket.onmessage = function(event) {
-        event.preventDefault()
-        console.log("ON MESSAGE2 :" + event.data);
-        var test = JSON.parse(event.data)
-        if (typeof test.rocketStatus != 'undefined') {
-            alert("Reg confirmed")
-        }
-        return false;
-    };
-</script>
+<script src="./help.js"></script>
+<script src="./app.js"></script>
 
 </html>

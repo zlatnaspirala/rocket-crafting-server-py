@@ -27,7 +27,7 @@ emailService = {
     "port": 587,
     "smtp_server": "live.smtp.mailtrap.io",
     "login": "api",
-    "password": "d394441ac819d000d002b67c750b5939",
+    "password": "*******************",
     "sender_email": "GamePlay@maximumroulette.com",
     "receiver_email": "zlatnaspirala@gmail.com"
 }
