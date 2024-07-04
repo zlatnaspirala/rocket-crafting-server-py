@@ -4,9 +4,8 @@ import json
 
 
 async def handleClientRequest(data, websocket):
-    print("handleClientRequest____: " + data)
+    print("handleClientRequest: " + data)
     o = json.loads(data)
-    # print("handleClientRequest action: " + o["action"])
     if str(o["action"]) == "REGISTER":
         print("<REGISTER>")
         # Run DB part test
@@ -67,11 +66,10 @@ async def handleClientRequest(data, websocket):
         result = rcs.logout(o["userLoginData"], rcsUsers)
         await rocket_send(websocket, json.dumps(result))
     else:
-        return "unhandled"
         print("unhandled request...")
+        return "unhandled"
 
 
 async def rocket_send(websocket, result):
     print("Sent ping message attached.")
     await websocket.send(result)
-    print("Sent ping message attached.")
