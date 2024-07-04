@@ -3,6 +3,9 @@ import React from 'react';
 
 export class RocketRegister extends React.Component {
 
+  constructor(arg) {
+    console.log("arg", arg)
+  }
   componentDidMount() {
     console.log('RocketCrafting Account componets loaded.')
   }
@@ -10,7 +13,7 @@ export class RocketRegister extends React.Component {
   register() {
     notify.show("REGISTER CALL")
     console.log('RocketCrafting Account register call.')
-    
+
   }
 
   non() {

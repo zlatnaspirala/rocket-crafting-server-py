@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {AccountComponent} from "./components/account";
+import {RocketRegister} from "./components/register";
 import {notify} from './pure-components/notify';
 import {Net} from './networking/net';
 
@@ -17,7 +17,7 @@ class App extends React.Component {
         <div id="msgBox" className="msg-box animate1" onClick={notify.copy()}></div>
         <header className="App-header">
           <img className="App-logo" alt="Powered by RocketCraftingServer" src="assets/rocket-craft.png"></img>
-          <AccountComponent></AccountComponent>
+          <RocketRegister></RocketRegister>
         </header>
       </div>
     )
