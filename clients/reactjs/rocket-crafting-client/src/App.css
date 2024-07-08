@@ -4,7 +4,7 @@
 
 .App-header {
   background-color: #333;
-  height: 98vh;
+  /* height: 98vh; */
   display: block;
   flex-direction: column;
   /* align-items: center; */
@@ -119,9 +119,9 @@
       color-stop(0%, rgba(128, 128, 128, 1)),
       color-stop(58%, rgba(59, 50, 50, 1)),
       color-stop(100%, rgba(59, 50, 50, 1)));
-  background: -webkit-linear-gradient(top, rgba(128, 128, 128, 1) 0%,
-      rgba(59, 50, 50, 1) 58%,
-      rgba(59, 50, 50, 1) 100%);
+  background: -webkit-linear-gradient(top, rgb(6, 108, 149) 0%,
+      rgb(255, 255, 255) 58%,
+      rgb(4, 208, 245) 100%);
 
   background-clip: text;
   -webkit-background-clip: text;

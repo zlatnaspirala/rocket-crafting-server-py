@@ -70,7 +70,7 @@ export class RocketSmallMenu extends React.Component {
 
   render() {
     return (
-      <div style={{display: "flex", flexDirection: "column", position: "absolute", left: "0", width: "150px"}}>
+      <div style={{display: "flex", flexDirection: "column",  width: "150px"}}>
         <button style={{width: "100%", height: "fit-content"}} onClick={this.showMenu} className=''>
           <div data-text="Menu" className="textStroke">Menu</div>
         </button>

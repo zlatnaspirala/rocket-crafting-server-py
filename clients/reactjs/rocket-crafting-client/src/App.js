@@ -67,7 +67,7 @@ class App extends React.Component {
         <header className="App-header">
           {this.state.showForms === false ?
             <>
-              <div style={{position: "absolute", left: "35%", top: "1%", width: "350px", border: "solid 1px red"}}>
+              <div className="textStroke" style={{width: "350px"}}>
                 RocketCraftingServer Web Client examples<br />
                 <img style={{width: "90px"}} src="./assets/logo5.png" alt="logo" />
                 <br />
@@ -85,13 +85,13 @@ class App extends React.Component {
                   showLogout={this.showLogout} ></RocketMenu>
               </div>
             </> :
-            <>
+            <div style={{marginTop: "50px"}}>
               {this.state.registerVisible === true ? <RocketRegister></RocketRegister> : null}
               {this.state.registerConfirmVisible === true ? <RocketRegisterConfirm></RocketRegisterConfirm> : null}
-              {this.state.loginVisible === true ? <RocketLogin></RocketLogin> : null}
+              {this.state.loginVisible === true ? <RocketLogin net={this.net} ></RocketLogin> : null}
               {this.state.loginFastVisible === true ? <RocketLoginFast></RocketLoginFast> : null}
               {this.state.logoutVisible === true ? <RocketLogout></RocketLogout> : null}
-            </>
+            </div>
           }
         </header>
       </div>

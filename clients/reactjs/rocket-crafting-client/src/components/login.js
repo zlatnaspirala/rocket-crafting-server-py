@@ -1,34 +1,49 @@
 import {notify} from '../pure-components/notify';
 import React from 'react';
+import {byId} from '../services/utils';
 
 export class RocketLogin extends React.Component {
 
+  refEmailLogin = React.createRef();
+  refPasswordLogin = React.createRef();
+
   constructor(arg) {
     super()
-    console.log("arg", arg)
+
+    this.state = {
+      email: ""
+    }
+    console.log("arg", arg.net.socket.send)
   }
 
   componentDidMount() {
     console.log('RocketCrafting RocketLogin componets loaded.')
   }
 
-  login() {
-    notify.show("login CALL")
-    console.log('RocketCrafting login call.')
+  login = () => {
+    notify.show("LOGIN")
+    console.log('RocketCrafting login call. byId(passwordLogin).value ', byId('passwordLogin').value)
+    // CONFIRMATION
+    var data = {
+      action: "LOGIN",
+      userLoginData: {
+        password: this.refPasswordLogin.current.value,
+        email: this.refEmailLogin.current.value
+      }
+    }
+    this.props.net.socket.send(JSON.stringify(data))
   }
 
-  non() {
-    // console.log("non")
-  }
+  non() {}
 
   render() {
     return (
       <div className="myForms">
         <div className="myForms">
           <h3>LOGIN FORM</h3>
-          <input onChange={(e) => this.non(e)} id="emailLogin" type="email" value="zlatnaspirala@gmail.com" />
-          <input onChange={(e) => this.non(e)} id="passwordLogin" type="password" value="" />
-          <button id="login" onClick={this.login} >Login</button>
+          <input onChange={(e) => this.non(e)} ref={this.refEmailLogin} type="email" />
+          <input onChange={(e) => this.non(e)} ref={this.refPasswordLogin} type="password" />
+          <button onClick={this.login} >Login</button>
         </div>
       </div>
     );
