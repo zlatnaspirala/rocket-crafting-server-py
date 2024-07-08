@@ -86,11 +86,11 @@ class App extends React.Component {
               </div>
             </> :
             <div style={{marginTop: "50px"}}>
-              {this.state.registerVisible === true ? <RocketRegister></RocketRegister> : null}
-              {this.state.registerConfirmVisible === true ? <RocketRegisterConfirm></RocketRegisterConfirm> : null}
+              {this.state.registerVisible === true ? <RocketRegister net={this.net}></RocketRegister> : null}
+              {this.state.registerConfirmVisible === true ? <RocketRegisterConfirm net={this.net}></RocketRegisterConfirm> : null}
               {this.state.loginVisible === true ? <RocketLogin net={this.net} ></RocketLogin> : null}
-              {this.state.loginFastVisible === true ? <RocketLoginFast></RocketLoginFast> : null}
-              {this.state.logoutVisible === true ? <RocketLogout></RocketLogout> : null}
+              {this.state.loginFastVisible === true ? <RocketLoginFast net={this.net}></RocketLoginFast> : null}
+              {this.state.logoutVisible === true ? <RocketLogout net={this.net}></RocketLogout> : null}
             </div>
           }
         </header>

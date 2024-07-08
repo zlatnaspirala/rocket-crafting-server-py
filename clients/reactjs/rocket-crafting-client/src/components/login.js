@@ -1,6 +1,5 @@
 import {notify} from '../pure-components/notify';
 import React from 'react';
-import {byId} from '../services/utils';
 
 export class RocketLogin extends React.Component {
 
@@ -22,8 +21,6 @@ export class RocketLogin extends React.Component {
 
   login = () => {
     notify.show("LOGIN")
-    console.log('RocketCrafting login call. byId(passwordLogin).value ', byId('passwordLogin').value)
-    // CONFIRMATION
     var data = {
       action: "LOGIN",
       userLoginData: {
