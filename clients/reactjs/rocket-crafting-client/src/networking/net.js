@@ -8,7 +8,7 @@ export class Net {
   constructor() {
 
     this.socket.addEventListener('open', function(event) {
-      this.socket.send('Connection Established');
+      this.send('Connection Established');
     });
 
     this.socket.addEventListener('close', function(event) {

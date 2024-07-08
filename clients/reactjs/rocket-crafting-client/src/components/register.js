@@ -5,27 +5,24 @@ export class RocketRegister extends React.Component {
 
   constructor(arg) {
     super()
-    console.log("arg", arg)
+    // console.log("arg", arg)
   }
+
   componentDidMount() {
-    console.log('RocketCrafting Account componets loaded.')
+    console.log('RocketCrafting RocketRegister componets loaded.')
   }
 
   register() {
     notify.show("REGISTER CALL")
-    console.log('RocketCrafting Account register call.')
-
   }
 
-  non() {
-    // console.log("non")
-  }
+  non() {}
 
   render() {
     return (
       <div className="myForms gradient-background">
         <h3>REGISTER FORM</h3>
-        <div style={{margin: "5px 5px 5px 5px", padding: "5px 5px 5px 5px", border: "solid 1px black"}}>
+        <div style={{height: "80px", margin: "5px 5px 5px 5px", padding: "5px 5px 5px 5px", border: "solid 1px black"}}>
           <label>Detail:</label>
           <textarea onChange={(e) => this.non(e)} value='var data = { action: "REGISTER", userRegData: { password: byId("password").value, email: byId("email").value }}; socket.send(JSON.stringify(data));' >
           </textarea>
@@ -37,13 +34,3 @@ export class RocketRegister extends React.Component {
     );
   }
 }
-
-// export class RegisterComponent extends RocketRegister {
-//   render() {
-//     return (
-//       <div>
-//         {super.render()}
-//       </div>
-//     );
-//   }
-// }

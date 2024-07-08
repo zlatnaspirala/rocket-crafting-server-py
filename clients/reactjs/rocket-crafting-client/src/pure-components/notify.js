@@ -5,7 +5,7 @@ export let notify = {
   pContent: () => byID('not-content'),
   copy: function() {
     try{
-    navigator.clipboard.writeText(notify.root().children[0].innerText);
+      // navigator.clipboard.writeText(notify.root().children[0].innerText);
     } catch (err) {}
   },
   c: 0, ic: 0, t: {},
