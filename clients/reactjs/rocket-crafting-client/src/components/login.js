@@ -8,10 +8,6 @@ export class RocketLogin extends React.Component {
 
   constructor(arg) {
     super()
-
-    this.state = {
-      email: ""
-    }
     console.log("arg", arg.net.socket.send)
   }
 
@@ -36,12 +32,10 @@ export class RocketLogin extends React.Component {
   render() {
     return (
       <div className="myForms">
-        <div className="myForms">
-          <h3>LOGIN FORM</h3>
-          <input onChange={(e) => this.non(e)} ref={this.refEmailLogin} type="email" />
-          <input onChange={(e) => this.non(e)} ref={this.refPasswordLogin} type="password" />
-          <button onClick={this.login} >Login</button>
-        </div>
+        <h3>LOGIN FORM</h3>
+        <input onChange={(e) => this.non(e)} ref={this.refEmailLogin} type="email" />
+        <input onChange={(e) => this.non(e)} ref={this.refPasswordLogin} type="password" />
+        <button onClick={this.login} >Login</button>
       </div>
     );
   }

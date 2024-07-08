@@ -14,7 +14,7 @@ export class RocketLoginFast extends React.Component {
     console.log('RocketCrafting RocketLoginFast componets loaded.')
   }
 
-  fastLogin() {
+  fastLogin = () => {
     notify.show("fastLogin CALL")
     notify.show("FASTLOGIN")
     var data = {
