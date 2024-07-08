@@ -80,7 +80,7 @@ def registerConfirmation(documentToInsert, collection):
 
 
 def login(documentToInsert, collection):
-    print("login fоr email: " + str(documentToInsert["email"]))
+    print("Login fоr email: " + str(documentToInsert["email"]))
     try:
         testPass = collection.find_one({"email": documentToInsert["email"]})
         if testPass != None:
