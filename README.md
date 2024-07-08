@@ -1,5 +1,5 @@
 # rocket-crafting-server-py
-## Alias RCS-Py
+## Alias RCS-Py-Sock
 
 ### Communication: webSockets
 ### Database:      MongoDB
@@ -18,7 +18,7 @@ python -m pip install pycryptodome
 
 If you have any error log like `missing module`, just install it.
 
-## Documentation for websock RCS-Py
+## Documentation for websock RCS-Py-Sock
 
 ## - Web app part
 
